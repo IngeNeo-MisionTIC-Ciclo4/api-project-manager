@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { conectarBD } from './src/db/database';
+import { conectarBD } from './src/db/database.js';
 
 
 //Nos permite usar los archivos .env para tener las rutas en otro lado no visibles en el repo

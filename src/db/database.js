@@ -1,11 +1,11 @@
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 //Preparamos para poder usar variables de entorno
 dotenv.config({ path: './.env' });
 
 const conectarBD = async () => {
-	return await connect(process.env.DATABASE_URL)
+	return await mongoose.connect(process.env.DATABASE_URL)
 		.then(() => {
 			console.log('Conexion exitosa a la base de datos');
 		})
