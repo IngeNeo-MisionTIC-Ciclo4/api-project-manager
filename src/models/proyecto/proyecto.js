@@ -19,7 +19,7 @@ const ProyectoSchema = new Schema
 				require: true,
 			},
 			presupuesto: {
-				type: Double,
+				type: Number,
 				require: true,
 			},
 			fechaInicio: {
