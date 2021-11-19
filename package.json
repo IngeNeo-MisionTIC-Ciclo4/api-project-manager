@@ -5,8 +5,10 @@
   "repository": "https://github.com/IngeNeo-MisionTIC-Ciclo4/api-project-manager.git",
   "author": "Equipo_Legacy",
   "license": "MIT",
+	"type": "module",
   "scripts": {
-    "start": "node index.js"
+	"start": "node index.js",
+	"dev": "nodemon index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -14,5 +16,8 @@
     "express": "^4.17.1",
     "graphql": "^16.0.1",
     "mongoose": "^6.0.13"
-  }
+  },
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
 }
