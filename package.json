@@ -5,9 +5,9 @@
   "repository": "https://github.com/IngeNeo-MisionTIC-Ciclo4/api-project-manager.git",
   "author": "Equipo_Legacy",
   "license": "MIT",
-	"scripts": {
-		"start": "ts-node index.ts"
-	},
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
   "dependencies": {
     "apollo-server-express": "^3.5.0",
     "cors": "^2.8.5",
