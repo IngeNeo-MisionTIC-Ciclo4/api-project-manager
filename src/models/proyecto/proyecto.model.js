@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ModeloUsuario } from '../usuario/usuario.js'
+import { ModeloUsuario } from '../usuario/usuario.model.js'
 
 const { Schema, model } = mongoose;
 
@@ -45,7 +45,24 @@ const ProyectoSchema = new Schema
 				enum: ['Iniciado', 'En_desarrollo', 'Terminado', 'Nulo'],
 				default: 'Nulo',
 			}
-		});
+		},
+		{
+			toJSON: { virtuals: true },
+			toObject: { virtuals: true },
+		}
+		);
+
+ProyectoSchema.virtual('avances', {
+	ref: 'Avance',
+	localField: '_id',
+	foreignField: 'proyecto',
+});
+
+ProyectoSchema.virtual('inscripciones', {
+	ref: 'Inscripcion',
+	localField: '_id',
+	foreignField: 'proyecto',
+});
 
 const ModeloProyecto = model('Proyecto', ProyectoSchema);
 
