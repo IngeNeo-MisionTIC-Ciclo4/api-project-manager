@@ -19,13 +19,13 @@ const InscripcionSchema = new Schema ({
 	},
 	proyecto: {
 		type: Schema.Types.ObjectId,
-		required: true,
 		ref: ModeloProyecto,
+		required: true,
 	},
 	estudiante: {
 		type: Schema.Types.ObjectId,
-		required: true,
 		ref: ModeloUsuario,
+		required: true,
 	},
 });
 
