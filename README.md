@@ -2,7 +2,7 @@
 Proyecto Mongo-Express-ReactJS-NodeJS-GraphQL
 
 
-#### Colaboradores – Sprint 2
+#### Colaboradores – Sprint 3 BackEnd con GrapnQL
 
 
 |     | Colaboradores                        |
@@ -13,6 +13,39 @@ Proyecto Mongo-Express-ReactJS-NodeJS-GraphQL
 | `4` | Diana Marcela Pinilla Ortegon        |
 | `5` | Leidy Viviana Gallardo Rico          |
 
+
+### Comandos a ejecutar
+
+Puedes comprobar tu versión de Node con el siguiente comando
+
+`$ node --version`
+
+te recomendamos tener la versión v16.13.0
+
+Puedes comprobar tu versión de npm con el siguiente comando
+
+`$ npm --version`
+
+te recomendamos tener la versión 8.1.3 aunque solo usaremos para descargar el gestor de paquetes yarn
+
+Posterior al clonar el repositorio es necesario ejecutar el comando.
+
+`$ npm install -g yarn`
+
+te recomendamos tener la versión 1.22.15
+
+
+Luego para tener el node_modules y actualizar las dependencias del proyecto ejecutamos.
+
+`$ yarn install`
+
+Para ejecutar el proyecto localmente podemos usar el comando usando nodemon
+
+`$ yarn dev`
+
+o ejecutar el proyecto localmente con
+
+`$ yarn start`
 
 ### Link al tablero de Trello
 
