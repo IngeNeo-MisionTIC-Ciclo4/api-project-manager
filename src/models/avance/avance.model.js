@@ -7,8 +7,8 @@ const { Schema, model } = mongoose;
 const AvanceSchema = new Schema ({
 	proyecto: {
 		type: Schema.Types.ObjectId,
-		required: true,
 		ref: ModeloProyecto,
+		required: true,
 	},
 	descripcion: {
 		type: String,
@@ -20,12 +20,11 @@ const AvanceSchema = new Schema ({
 	},
 	observaciones: {
 		type: String,
-		required: false,
 	},
 	estudiante: {
 		type: Schema.Types.ObjectId,
-		required: true,
 		ref: ModeloUsuario,
+		required: true,
 	},
 });
 
