@@ -7,7 +7,7 @@ const tiposEnums = gql`
 		No_Autorizado
 	}
 
-	enum Enum_Rol {
+	enum Enum_Tusuario {
 		Estudiante
 		Lider
 		Administrador
