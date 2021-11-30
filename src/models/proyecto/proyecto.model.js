@@ -10,14 +10,19 @@ const ProyectoSchema = new Schema
 				type: String,
 				require: true,
 			},
-			objetivogeneral: {
-				type: String,
-				require: true,
-			},
-			objetivoespecifico: {
-				type: String,
-				require: true,
-			},
+			objetivos: [
+				{
+					descripcion:{
+						type: String,
+						require: true,
+					},
+					tipo: {
+						type: String,
+						enum: ['General', 'Especifico'],
+						required: true,
+					},
+				},
+			],
 			presupuesto: {
 				type: Number,
 				require: true,
@@ -49,6 +54,7 @@ const ProyectoSchema = new Schema
 		{
 			toJSON: { virtuals: true },
 			toObject: { virtuals: true },
+			versionKey: false
 		}
 		);
 
