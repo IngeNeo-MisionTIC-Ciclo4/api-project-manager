@@ -2,13 +2,26 @@ import { ModeloUsuario } from './usuario.model.js';
 
 const resolversUsuario = {
 	Query: {
+
 		Usuarios: async (parent, args) => {
 			console.log("Esta entrando a consultar todos los usuarios");
 			console.log("data", args);
 			//Consulta todos los usuarios
-			const usuarios = await ModeloUsuario.find();
+			const usuarios = await ModeloUsuario.find().populate([
+				{
+					path: 'inscripciones',
+					populate: {
+						path: 'proyecto',
+						populate: [{ path: 'lider' }, { path: 'avances' }],
+					},
+				},
+				{
+					path: 'proyectosLiderados',
+				},
+			]);
 			return usuarios;
 		},
+
 		Usuario: async (parent, args) => {
 			console.log("Esta entrando a consultar un usuario");
 			console.log("data", args);
@@ -17,17 +30,13 @@ const resolversUsuario = {
 			return usuario;
 		},
 	},
+
 	Mutation: {
+
 		crearUsuario: async (parent, args) => {
 			console.log("Esta entrando a crear un usuario");
 			console.log("data", args);
-			const usuarioCreado = await ModeloUsuario.create({
-				cedula: args.cedula,
-				nombres: args.nombres,
-				apellidos: args.apellidos,
-				correo: args.correo,
-				tusuario: args.tusuario,
-			});
+			const usuarioCreado = await ModeloUsuario.create({ ...args.campos });
 
 			if (Object.keys(args).includes('estado')) {
 				usuarioCreado.estado = args.estado;
@@ -35,24 +44,20 @@ const resolversUsuario = {
 
 			return usuarioCreado;
 		},
+
 		editarUsuario: async (parent, args) => {
-			//El tipo de usuario no se puede modificar
+			//El tipo de usuario no se puede modificar tenerlo en cuenta
 			console.log("Esta entrando a editar un usuario");
 			console.log("data", args);
 			const usuarioEditado = await ModeloUsuario.findByIdAndUpdate(
 				args._id,
-				{
-					cedula: args.cedula,
-					nombres: args.nombres,
-					apellidos: args.apellidos,
-					correo: args.correo,
-					estado: args.estado,
-				},
+				{ ...args.campos },
 				{ new: true }
 			);
 
 			return usuarioEditado;
 		},
+
 		eliminarUsuario: async (parent, args) => {
 			console.log("Esta entrando a eliminar un usuario");
 			console.log("data", args);
