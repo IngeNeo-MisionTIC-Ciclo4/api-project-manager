@@ -51,7 +51,7 @@ const UsuarioSchema = new Schema
 	UsuarioSchema.virtual('avancesCreados', {
 		ref: 'Avance',
 		localField: '_id',
-		foreignField: 'estudiante',
+		foreignField: 'creadoPorEstudiante',
 	});
 
 	UsuarioSchema.virtual('inscripciones', {

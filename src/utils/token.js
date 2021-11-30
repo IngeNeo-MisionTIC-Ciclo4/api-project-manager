@@ -1,10 +1,13 @@
 import jwt from 'jsonwebtoken';
 
+//Definimos una constante con la llave secreta
+const secreta = process.env.SECRET
+
 const validarToken = (token) => {
 	//Se valida si viene el token
 	if (token) {
 		//Se valida el token con la llave secreta
-		const verification = jwt.verify(token, 'secret', (err, data) => {
+		const verification = jwt.verify(token, secreta, (err, data) => {
 			//Se retorna la data si es correcto el token
 			if (data) {
 				return {
@@ -25,7 +28,7 @@ const validarToken = (token) => {
 
 const generarToken = (payload) => {
 	//Se genera un token y se determina el tipo de expiración en 1 día
-	return jwt.sign(payload, 'secret', {
+	return jwt.sign(payload, secreta, {
 		expiresIn: '24h',
 	});
 };
