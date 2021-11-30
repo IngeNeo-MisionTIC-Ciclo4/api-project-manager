@@ -5,7 +5,7 @@ const resolversProyecto = {
 		Proyectos: async (parent, args) => {
 			console.log("Esta entrando a consultar todos los proyectos");
 			console.log("data", args);
-			const proyectos = await ModeloProyecto.find().populate('lider');
+			const proyectos = await ModeloProyecto.find().populate('lider').populate('inscripciones').populate('avances');
 			return proyectos;
 		},
 		Proyecto: async (parent, args) => {
