@@ -10,6 +10,9 @@
 		"start": "node index.js",
 		"dev": "nodemon index.js"
 	},
+	"engines": {
+		"node": "16.x"
+	},
   "dependencies": {
 		"apollo-server-express": "^3.5.0",
     "cors": "^2.8.5",
