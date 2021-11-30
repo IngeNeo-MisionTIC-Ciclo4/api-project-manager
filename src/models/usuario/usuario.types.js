@@ -7,7 +7,7 @@ const tiposUsuario = gql`
 		nombres: String
 		apellidos: String
 		correo: String
-		tusuario: Enum_Rol
+		tusuario: Enum_Tusuario
 		estado: Enum_EstadoUsuario
 	}
 
@@ -17,7 +17,7 @@ const tiposUsuario = gql`
 		nombres: String!
 		apellidos: String!
 		correo: String!
-		tusuario: Enum_Rol!
+		tusuario: Enum_Tusuario!
 		estado: Enum_EstadoUsuario
 		inscripciones: [Inscripcion]
 		avancesCreados: [Avance]
