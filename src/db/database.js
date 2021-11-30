@@ -15,5 +15,5 @@ const conectarBD = async () => {
 		});
 };
 
-//Exportamos la funcion creada
+//Exportamos la función creada
 export { conectarBD };
