@@ -6,7 +6,16 @@ const resolverInscripcion = {
 		Inscripciones: async (parent, args) => {
 			console.log("Esta entrando a consultar todas las inscripciones");
 			console.log("data", args);
-			const inscripciones = await ModeloInscripcion.find().populate('proyecto').populate('estudiante');
+			//const inscripciones = await ModeloInscripcion.find().populate('proyecto').populate('estudiante');
+			const inscripciones = await ModeloInscripcion.find().populate([
+				{
+						path: 'proyecto',
+						populate: [{ path: 'lider' }, { path: 'avances' }],
+				},
+				{
+					path: 'estudiante',
+				},
+			]);
 			return inscripciones;
 		},
 
