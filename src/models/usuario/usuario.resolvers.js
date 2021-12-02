@@ -35,6 +35,14 @@ const resolversUsuario = {
 			const usuario = await ModeloUsuario.findOne({ _id: args._id });
 			return usuario;
 		},
+
+		TipoUsuario: async (parent, args) => {
+			console.log("Esta entrando a consultar los usuarios de un tipo especifico");
+			console.log("data", args);
+			//Consulta los usuario de un tipo especifico
+			const usuario = await ModeloUsuario.find({ tusuario: args.tusuario });
+			return usuario;
+		},
 	},
 
 	Mutation: {

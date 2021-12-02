@@ -27,6 +27,7 @@ const tiposUsuario = gql`
 	type Query {
 		Usuarios: [Usuario]
 		Usuario(_id: String!): Usuario
+		TipoUsuario(tusuario: Enum_Tusuario!): [Usuario]
 	}
 
 	type Mutation {
