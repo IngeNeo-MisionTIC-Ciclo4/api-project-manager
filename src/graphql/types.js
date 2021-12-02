@@ -4,6 +4,7 @@ import { tiposUsuario } from '../models/usuario/usuario.types.js';
 import { tiposProyecto } from '../models/proyecto/proyecto.types.js';
 import { tiposAvance } from '../models/avance/avance.types.js';
 import { tiposInscripcion } from '../models/inscripcion/inscripcion.types.js';
+import { tiposAutenticacion } from '../models/autenticacion/autenticacion.types.js'
 
 //Manejamos un tipo global para el manejo del tipo fecha
 const tiposGlobales = gql`
@@ -18,4 +19,5 @@ export const types = [
 	tiposProyecto,
 	tiposAvance,
 	tiposInscripcion,
+	tiposAutenticacion,
 ];
