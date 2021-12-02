@@ -19,7 +19,7 @@ const resolversProyecto = {
 			console.log("Esta entrando a consultar los proyectos liderados");
 			console.log("data", args);
 			//Consulta los proyectos por lider
-			const ProyectosLiderados = await ModeloProyecto.find({ lider: args.lider }).populate("lider").populate('inscripciones');
+			const ProyectosLiderados = await ModeloProyecto.find({ lider: args.lider }).populate("lider").populate('inscripciones').populate('avances');
 			return ProyectosLiderados;
 		},
 	},
