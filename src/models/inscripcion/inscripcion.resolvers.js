@@ -56,6 +56,18 @@ const resolverInscripcion = {
 			return inscripcionEditada;
 		},
 
+		aprobarInscripcion: async (parent, args) => {
+			const inscripcionAprobada = await ModeloInscripcion.findByIdAndUpdate(
+				args.id,
+				{
+					estado: 'Aceptado',
+					fechaIngreso: Date.now(),
+				},
+				{ new: true }
+			);
+			return inscripcionAprobada;
+		},
+
 		eliminarInscripcion: async (parent, args) => {
 			console.log("Esta entrando a eliminar una inscripción");
 			console.log("data", args);

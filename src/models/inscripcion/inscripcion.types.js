@@ -28,6 +28,8 @@ const tiposInscripcion = gql`
 	type Mutation {
 		crearInscripcion( campos: camposInscripcion! ): Inscripcion
 
+		aprobarInscripcion(id: String!): Inscripcion
+
 		editarInscripcion( _id: String!, campos: camposInscripcion! ): Inscripcion
 
 		eliminarInscripcion(_id: String): Inscripcion
