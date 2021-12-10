@@ -1,56 +1,52 @@
 import { ModeloUsuario } from './usuario.model.js';
+import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
+
 
 const resolversUsuario = {
+	Usuario: {
+
+		inscripciones: async (parent, args, context) => {
+			return ModeloInscripcion.find({ estudiante: parent._id });
+		},
+	},
+
 	Query: {
 
-		Usuarios: async (parent, args) => {
+		Usuarios: async (parent, args, context) => {
 			console.log("Esta entrando a consultar todos los usuarios");
 			console.log("data", args);
 			//Consulta todos los usuarios
-			const usuarios = await ModeloUsuario.find().populate([
-				{
-					path: 'inscripciones',
-					populate: {
-						path: 'proyecto',
-						populate: [{ path: 'lider' }, { path: 'avances' }],
-					},
-				},
-				{
-					path: 'proyectosLiderados',
-				},
-			]).populate([
-				{
-					path: 'avancesCreados',
-					populate: {
-						path: 'proyecto',
-					},
-				}]);
+			const usuarios = await ModeloUsuario.find({ ...args.filtro });
 			return usuarios;
 		},
 
-		Usuario: async (parent, args) => {
+		Usuario: async (parent, args, context) => {
 			console.log("Esta entrando a consultar un usuario");
 			console.log("data", args);
 			//Consulta un solo usuario por ID
 			const usuario = await ModeloUsuario.findOne({ _id: args._id });
 			return usuario;
 		},
-
-		TipoUsuario: async (parent, args) => {
-			console.log("Esta entrando a consultar los usuarios de un tipo especifico");
-			console.log("data", args);
-			//Consulta los usuario de un tipo especifico
-			const usuario = await ModeloUsuario.find({ tusuario: args.tusuario });
-			return usuario;
-		},
 	},
 
 	Mutation: {
 
-		crearUsuario: async (parent, args) => {
+		crearUsuario: async (parent, args, context) => {
 			console.log("Esta entrando a crear un usuario");
 			console.log("data", args);
-			const usuarioCreado = await ModeloUsuario.create({ ...args.campos });
+			//Se define el número de veces que se encriptara la contraseña
+			const salt = await bcrypt.genSalt(15);
+			//Se usa la función de bcrypt Salt para encriptar la contraseña varias veces
+			const hashedPassword = await bcrypt.hash(args.password, salt);
+			//Se procede a crear el usuario en la base de datos
+			const usuarioCreado = await ModeloUsuario.create({
+				cedula: args.cedula,
+				nombres: args.nombres,
+				apellidos: args.apellidos,
+				correo: args.correo,
+				tusuario: args.tusuario,
+				password: hashedPassword,
+			});
 
 			if (Object.keys(args).includes('estado')) {
 				usuarioCreado.estado = args.estado;
@@ -59,7 +55,7 @@ const resolversUsuario = {
 			return usuarioCreado;
 		},
 
-		editarUsuario: async (parent, args) => {
+		editarUsuario: async (parent, args, context) => {
 			//El tipo de usuario no se puede modificar tenerlo en cuenta
 			console.log("Esta entrando a editar un usuario");
 			console.log("data", args);
@@ -72,7 +68,7 @@ const resolversUsuario = {
 			return usuarioEditado;
 		},
 
-		eliminarUsuario: async (parent, args) => {
+		eliminarUsuario: async (parent, args, context) => {
 			console.log("Esta entrando a eliminar un usuario");
 			console.log("data", args);
 			//Eliminación por ID o por correo

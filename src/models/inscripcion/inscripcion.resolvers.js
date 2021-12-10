@@ -1,21 +1,38 @@
-import { ModeloInscripcion } from './inscripcion.model.js';
+import { ModeloProyecto } from './proyecto.model.js';
+import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
+import { ModeloUsuario } from './usuario.model.js';
 
 const resolverInscripcion = {
+
+	Inscripcion: {
+		proyecto: async (parent, args, context) => {
+			return await ModeloProyecto.findOne({ _id: parent.proyecto });
+		},
+		estudiante: async (parent, args, context) => {
+			return await ModeloUsuario.findOne({ _id: parent.estudiante });
+		},
+	},
+
 	Query: {
 
 		Inscripciones: async (parent, args) => {
 			console.log("Esta entrando a consultar todas las inscripciones");
 			console.log("data", args);
 			//const inscripciones = await ModeloInscripcion.find().populate('proyecto').populate('estudiante');
-			const inscripciones = await ModeloInscripcion.find().populate([
-				{
-						path: 'proyecto',
-						populate: [{ path: 'lider' }, { path: 'avances' }],
-				},
-				{
-					path: 'estudiante',
-				},
-			]);
+			let filtro = {};
+			if (context.userData) {
+				if (context.userData.rol === 'Lider') {
+					const projects = await ModeloProyecto.find({ lider: context.userData._id });
+					const projectList = projects.map((p) => p._id.toString());
+					filtro = {
+						proyecto: {
+							$in: projectList,
+						},
+					};
+				}
+			}
+
+			const inscripciones = await ModeloInscripcion.find({ ...filtro });
 			return inscripciones;
 		},
 
@@ -38,14 +55,14 @@ const resolverInscripcion = {
 
 	Mutation: {
 
-		crearInscripcion: async (parent, args) => {
+		crearInscripcion: async (parent, args, context) => {
 			console.log("Esta entrando a crear una inscripción");
 			console.log("data", args);
 			const inscripcionCreada = await ModeloInscripcion.create({ ...args.campos });
 			return inscripcionCreada;
 		},
 
-		editarInscripcion: async (parent, args) => {
+		editarInscripcion: async (parent, args, context) => {
 			console.log("Esta entrando a editar una inscripción");
 			console.log("data", args);
 			const inscripcionEditada = await ModeloInscripcion.findByIdAndUpdate(
@@ -56,7 +73,7 @@ const resolverInscripcion = {
 			return inscripcionEditada;
 		},
 
-		aprobarInscripcion: async (parent, args) => {
+		aprobarInscripcion: async (parent, args, context) => {
 			const inscripcionAprobada = await ModeloInscripcion.findByIdAndUpdate(
 				args.id,
 				{
@@ -68,7 +85,7 @@ const resolverInscripcion = {
 			return inscripcionAprobada;
 		},
 
-		eliminarInscripcion: async (parent, args) => {
+		eliminarInscripcion: async (parent, args, context) => {
 			console.log("Esta entrando a eliminar una inscripción");
 			console.log("data", args);
 			//Eliminación por ID

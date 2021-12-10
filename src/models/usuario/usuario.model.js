@@ -38,6 +38,10 @@ const UsuarioSchema = new Schema
 			enum: ['Pendiente', 'Autorizado', 'No_Autorizado'],
 			default: 'Pendiente',
 		},
+		password: {
+			type: String,
+			required: true,
+		},
 	},
 	{ versionKey: false }
 	);

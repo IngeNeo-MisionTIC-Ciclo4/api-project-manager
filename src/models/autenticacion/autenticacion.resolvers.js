@@ -18,7 +18,6 @@ const resolversAutenticacion = {
 				apellidos: args.apellidos,
 				correo: args.correo,
 				tusuario: args.tusuario,
-				estado: args.estado,
 				password: hashedPassword,
 			});
 			console.log('usuario creado con exito', usuarioCreado);

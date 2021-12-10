@@ -9,6 +9,15 @@ const tiposUsuario = gql`
 		correo: String
 		tusuario: Enum_Tusuario
 		estado: Enum_EstadoUsuario
+		password: String
+	}
+
+	input FiltroUsuarios {
+		_id: ID
+		cedula: String
+		correo: String
+		tusuario: Enum_Rol
+		estado: Enum_EstadoUsuario
 	}
 
 	type Usuario {
@@ -25,9 +34,8 @@ const tiposUsuario = gql`
 	}
 
 	type Query {
-		Usuarios: [Usuario]
+		Usuarios(filtro: FiltroUsuarios): [Usuario]
 		Usuario(_id: String!): Usuario
-		TipoUsuario(tusuario: Enum_Tusuario!): [Usuario]
 	}
 
 	type Mutation {

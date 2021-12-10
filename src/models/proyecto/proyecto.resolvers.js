@@ -1,39 +1,61 @@
 import { ModeloProyecto } from './proyecto.model.js';
+import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
+import { ModeloUsuario } from './usuario.model.js';
+
+
 
 const resolversProyecto = {
+
+	Proyecto: {
+		lider: async (parent, args, context) => {
+			const usr = await ModeloUsuario.findOne({
+				_id: parent.lider.toString(),
+			});
+			return usr;
+		},
+
+		inscripciones: async (parent, args, context) => {
+			const inscripciones = await ModeloInscripcion.find({
+				proyecto: parent._id,
+			});
+			return inscripciones;
+		},
+	},
+
 	Query: {
-		Proyectos: async (parent, args) => {
+		Proyectos: async (parent, args, context) => {
 			console.log("Esta entrando a consultar todos los proyectos");
 			console.log("data", args);
-			const proyectos = await ModeloProyecto.find().populate('lider').populate('inscripciones').populate('avances');
+			const proyectos = await ModeloProyecto.find();
 			return proyectos;
 		},
-		Proyecto: async (parent, args) => {
+
+		Proyecto: async (parent, args, context) => {
 			console.log("Esta entrando a consultar un proyecto");
 			console.log("data", args);
 			//Consulta un solo proyecto por ID
-			const proyecto = await ModeloProyecto.findOne({ _id: args._id }).populate('lider');
+			const proyecto = await ModeloProyecto.findOne({ _id: args._id });
 			return proyecto;
 		},
-		ProyectosLiderados: async (parent, args) => {
+		ProyectosLiderados: async (parent, args, context) => {
 			console.log("Esta entrando a consultar los proyectos liderados");
 			console.log("data", args);
 			//Consulta los proyectos por lider
-			const ProyectosLiderados = await ModeloProyecto.find({ lider: args.lider }).populate("lider").populate('inscripciones').populate('avances');
+			const ProyectosLiderados = await ModeloProyecto.find({ lider: args.lider }).populate('avances');
 			return ProyectosLiderados;
 		},
 	},
 
 	Mutation: {
 
-		crearProyecto: async (parent, args) => {
+		crearProyecto: async (parent, args, context) => {
 			console.log("Esta entrando a crear un proyecto");
 			console.log("data", args);
 			const proyectoCreado = await ModeloProyecto.create({...args.campos });
 			return proyectoCreado;
 		},
 
-		editarProyecto: async (parent, args) => {
+		editarProyecto: async (parent, args, context) => {
 			console.log("Esta entrando a editar un proyecto");
 			console.log("data", args);
 			const proyectoEditado = await ModeloProyecto.findByIdAndUpdate(
@@ -44,7 +66,7 @@ const resolversProyecto = {
 			return proyectoEditado;
 		},
 
-		crearObjetivo: async (parent, args) => {
+		crearObjetivo: async (parent, args, context) => {
 			console.log("Esta entrando a crear un objetivo");
 			console.log("data", args);
 			const proyectoConObjetivo = await ModeloProyecto.findByIdAndUpdate(
@@ -60,7 +82,7 @@ const resolversProyecto = {
 			return proyectoConObjetivo;
 		},
 
-		editarObjetivo: async (parent, args) => {
+		editarObjetivo: async (parent, args, context) => {
 			console.log("Esta entrando a editar un objetivo");
 			console.log("data", args);
 			const proyectoEditado = await ModeloProyecto.findByIdAndUpdate(
@@ -76,7 +98,7 @@ const resolversProyecto = {
 			return proyectoEditado;
 		},
 
-		eliminarObjetivo: async (parent, args) => {
+		eliminarObjetivo: async (parent, args, context) => {
 			console.log("Esta entrando a eliminar un objetivo");
 			console.log("data", args);
 			const proyectoObjetivo = await ModeloProyecto.findByIdAndUpdate(
@@ -93,7 +115,7 @@ const resolversProyecto = {
 			return proyectoObjetivo;
 		},
 
-		eliminarProyecto: async (parent, args) => {
+		eliminarProyecto: async (parent, args, context) => {
 			console.log("Esta entrando a eliminar un proyecto");
 			console.log("data", args);
 			//Eliminación por ID

@@ -2,14 +2,14 @@ import { ModeloAvance } from './avance.model.js';
 
 const resolversAvance = {
 	Query: {
-		Avances: async (parent, args) => {
+		Avances: async (parent, args, context) => {
 			console.log("Está entrando a consultar todos los avances");
 			console.log("data", args);
 			const avances = await ModeloAvance.find().populate('proyecto').populate('creadoPorEstudiante');
 			return avances;
 		},
 
-		filtrarAvance: async (parents, args) => {
+		filtrarAvance: async (parents, args, context) => {
 			console.log("Está entrando a consultar un avance");
 			console.log("data", args);
 			const avanceFiltrado = await ModeloAvance.find({ _id: args._id }).populate('proyecto').populate('creadoPorEstudiante');
