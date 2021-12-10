@@ -12,14 +12,14 @@ dotenv.config({ path: './.env' });
 dotenv.config();
 
 //Obtener la información del usuario en el Token y validarlo
-const ObtenerDatosUsuario = (token) => {
+/* const ObtenerDatosUsuario = (token) => {
 	const verificacion = validarToken(token.split(' ')[1]);
 	if (verificacion.data) {
 		return verificacion.data;
 	} else {
 		return null;
 	}
-};
+}; */
 
 //Definimos el puerto a usar en el servidor
 const port = process.env.PORT || 5050;
@@ -28,7 +28,7 @@ const port = process.env.PORT || 5050;
 const server = new ApolloServer({
 	typeDefs: types,
 	resolvers: resolvers,
-	context: ({ req, res }) => {
+	/* context: ({ req, res }) => {
 		const token = req.headers?.authorization ?? null;
 		if (token) {
 			const userData = ObtenerDatosUsuario(token);
@@ -37,7 +37,7 @@ const server = new ApolloServer({
 			}
 		}
 		return null;
-	},
+	}, */
 });
 
 // Nos permite usar express como servidor

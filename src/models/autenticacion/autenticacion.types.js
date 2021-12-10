@@ -15,7 +15,6 @@ const tiposAutenticacion = gql`
 			correo: String!
 			password: String!
 			tusuario: Enum_Tusuario
-			estado: Enum_EstadoUsuario
 		): Token!
 
 		login(correo: String!, password: String!): Token
