@@ -16,7 +16,7 @@ const tiposUsuario = gql`
 		_id: ID
 		cedula: String
 		correo: String
-		tusuario: Enum_Rol
+		tusuario: Enum_Tusuario
 		estado: Enum_EstadoUsuario
 	}
 

@@ -1,4 +1,4 @@
-import { ModeloUsuario } from './usuario.model.js';
+import { ModeloUsuario } from '../usuario/usuario.model.js';
 import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
 
 

@@ -71,7 +71,7 @@ const resolversAutenticacion = {
 						nombres: context.userData.nombres,
 						apellidos: context.userData.apellidos,
 						correo: context.userData.correo,
-						tusuario: context.userData.rol,
+						tusuario: context.userData.tusuario,
 						estado: context.userData.estado,
 					}),
 				};
