@@ -26,10 +26,10 @@ type Proyecto {
 	_id: ID!
 	nombreproyecto: String!
 	presupuesto: Float!
-	fechaInicio: Date!
-	fechaFin: Date!
-	estado: Enum_EstadoProyecto!
-	fase: Enum_FaseProyecto!
+	fechaInicio: Date
+	fechaFin: Date
+	estado: Enum_EstadoProyecto
+	fase: Enum_FaseProyecto
 	lider: Usuario!
 	objetivos: [Objetivo]
 	avances: [Avance]
@@ -49,7 +49,13 @@ type Query {
 }
 
 type Mutation {
-	crearProyecto( campos: camposProyecto!, objetivos: [crearObjetivo] ): Proyecto
+
+	crearProyecto(
+      nombreproyecto: String!
+      presupuesto: Float!
+      lider: String!
+      objetivos: [crearObjetivo]
+    ): Proyecto
 
 	editarProyecto(_id: String!, campos: camposProyecto!): Proyecto
 

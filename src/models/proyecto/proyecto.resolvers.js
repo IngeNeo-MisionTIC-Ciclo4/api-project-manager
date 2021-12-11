@@ -26,7 +26,7 @@ const resolversProyecto = {
 		Proyectos: async (parent, args, context) => {
 			console.log("Esta entrando a consultar todos los proyectos");
 			console.log("data", args);
-			const proyectos = await ModeloProyecto.find();
+			const proyectos = await ModeloProyecto.find().populate('avances');
 			return proyectos;
 		},
 
@@ -51,7 +51,12 @@ const resolversProyecto = {
 		crearProyecto: async (parent, args, context) => {
 			console.log("Esta entrando a crear un proyecto");
 			console.log("data", args);
-			const proyectoCreado = await ModeloProyecto.create({...args.campos });
+			const proyectoCreado = await ModeloProyecto.create({
+				nombreproyecto: args.nombreproyecto,
+				presupuesto: args.presupuesto,
+				lider: args.lider,
+				objetivos: args.objetivos,
+			});
 			return proyectoCreado;
 		},
 

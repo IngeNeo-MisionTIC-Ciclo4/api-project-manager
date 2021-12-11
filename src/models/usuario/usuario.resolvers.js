@@ -1,5 +1,6 @@
 import { ModeloUsuario } from '../usuario/usuario.model.js';
 import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
+import bcrypt from 'bcrypt';
 
 
 const resolversUsuario = {
@@ -61,7 +62,13 @@ const resolversUsuario = {
 			console.log("data", args);
 			const usuarioEditado = await ModeloUsuario.findByIdAndUpdate(
 				args._id,
-				{ ...args.campos },
+				{
+					cedula: args.cedula,
+					nombres: args.nombres,
+					apellidos: args.apellidos,
+					correo: args.correo,
+					estado: args.estado,
+				},
 				{ new: true }
 			);
 

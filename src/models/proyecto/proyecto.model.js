@@ -29,11 +29,11 @@ const ProyectoSchema = new Schema
 			},
 			fechaInicio: {
 				type: Date,
-				require: true,
+				require: false,
 			},
 			fechaFin: {
 				type: Date,
-				require: true,
+				require: false,
 			},
 			lider: {
 				type: Schema.Types.ObjectId,
