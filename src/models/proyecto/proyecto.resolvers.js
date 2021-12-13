@@ -2,8 +2,6 @@ import { ModeloProyecto } from '../proyecto/proyecto.model.js';
 import { ModeloInscripcion } from '../inscripcion/inscripcion.model.js';
 import { ModeloUsuario } from '../usuario/usuario.model.js';
 
-
-
 const resolversProyecto = {
 
 	Proyecto: {

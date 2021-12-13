@@ -21,6 +21,7 @@ const tiposInscripcion = gql`
 
 	type Query {
 		Inscripciones: [Inscripcion]
+		InscripcionesAll: [Inscripcion]
 		Inscripcion(_id: String!): Inscripcion
 		MisInscripciones(estudiante: String!): [Inscripcion]
 	}

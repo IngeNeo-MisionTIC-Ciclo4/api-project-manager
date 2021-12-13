@@ -15,7 +15,15 @@ const resolverInscripcion = {
 
 	Query: {
 
-		Inscripciones: async (parent, args) => {
+		InscripcionesAll: async (parent, args) => {
+			console.log("Esta entrando a consultar todas las inscripciones");
+			console.log("data", args);
+			//Consulta una sola inscripcion por ID
+			const inscripcion = await ModeloInscripcion.find().populate('proyecto').populate('estudiante');
+			return inscripcion;
+		},
+
+		Inscripciones: async (parent, args, context) => {
 			console.log("Esta entrando a consultar todas las inscripciones");
 			console.log("data", args);
 			//const inscripciones = await ModeloInscripcion.find().populate('proyecto').populate('estudiante');

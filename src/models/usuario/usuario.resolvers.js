@@ -13,10 +13,18 @@ const resolversUsuario = {
 
 	Query: {
 
-		Usuarios: async (parent, args, context) => {
+		UsuariosAll: async (parent, args, context) => {
 			console.log("Esta entrando a consultar todos los usuarios");
 			console.log("data", args);
 			//Consulta todos los usuarios
+			const usuariosAll = await ModeloUsuario.find();
+			return usuariosAll;
+		},
+
+		Usuarios: async (parent, args, context) => {
+			console.log("Esta entrando a consultar todos los usuarios con filtro");
+			console.log("data", args);
+			//Consulta todos los usuarios por filtro
 			const usuarios = await ModeloUsuario.find({ ...args.filtro });
 			return usuarios;
 		},
