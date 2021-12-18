@@ -13,9 +13,6 @@
 		"lint": "eslint --ext .js .",
 		"lint:fix": "eslint --fix --ext .js ."
 	},
-	"engines": {
-		"node": "14.x"
-	},
 	"dependencies": {
 		"apollo-server-express": "^3.5.0",
 		"assert": "^2.0.0",
