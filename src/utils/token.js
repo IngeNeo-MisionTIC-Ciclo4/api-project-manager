@@ -26,11 +26,11 @@ const validarToken = (token) => {
 	}
 };
 
-const generarToken = (payload) => {
+const generarToken = (payload) => 
 	//Se genera un token y se determina el tipo de expiración en 1 día
-	return jwt.sign(payload, secreta, {
+	 jwt.sign(payload, secreta, {
 		expiresIn: '24h',
-	});
-};
+	})
+;
 
 export { generarToken, validarToken };

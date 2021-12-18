@@ -23,9 +23,7 @@ const UsuarioSchema = new Schema
 			required: true,
 			unique: true,
 			validate: {
-				validator: (email) => {
-					return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-				},
+				validator: (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
 				message: 'El formato del Email es incorrecto.',
 			},
 		},

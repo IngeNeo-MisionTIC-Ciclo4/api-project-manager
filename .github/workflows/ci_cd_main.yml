@@ -1,0 +1,55 @@
+# Este es un flujo de trabajo básico para ayudarlo a comenzar con Git-Actions.
+
+name: CI_CD_BACKEND
+
+# Controla cuándo se ejecutará el flujo de trabajo
+on:
+  # Activa el flujo de trabajo en eventos de solicitud de inserción o extracción, pero solo para la rama principal
+  push:
+    branches: ['main']
+
+# Una ejecución de flujo de trabajo se compone de uno o más trabajos que pueden ejecutarse secuencialmente o en paralelo
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+
+      - name: Instalacion de dependencias
+        run: yarn install
+
+      - name: Revision de lint buenas practicas de codigo
+        run: yarn lint
+
+  # Este flujo de trabajo contiene un solo trabajo llamado "compilación" o "build"
+  build:
+    # El tipo de corredor en el que se ejecutará el trabajo
+    runs-on: ubuntu-latest
+
+    # Los pasos representan una secuencia de tareas que se ejecutarán como parte del trabajo.
+    steps:
+      # Chequea tu repositorio en $ GITHUB_WORKSPACE, para que tu trabajo pueda acceder a él
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+
+      # Instalacion de dependencias
+      - name: Instalacion de dependencias
+        run: yarn install
+
+    needs: [lint]
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY_BACK}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_BACK}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+
+    needs: [build]

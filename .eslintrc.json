@@ -1,0 +1,21 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"rules": {
+		"prefer-destructuring": "warn",
+		"no-use-before-define": "off",
+		"import/no-unresolved": "off",
+		"camelcase": "off",
+		"no-underscore-dangle": "off",
+		"import/prefer-default-export": "off",
+		"arrow-body-style": "warn",
+		"no-nested-ternary": "warn",
+		"no-console": "off"
+	}
+}

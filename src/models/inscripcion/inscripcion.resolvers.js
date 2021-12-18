@@ -5,12 +5,8 @@ import { ModeloUsuario } from '../usuario/usuario.model.js';
 const resolverInscripcion = {
 
 	Inscripcion: {
-		proyecto: async (parent, args, context) => {
-			return await ModeloProyecto.findOne({ _id: parent.proyecto });
-		},
-		estudiante: async (parent, args, context) => {
-			return await ModeloUsuario.findOne({ _id: parent.estudiante });
-		},
+		proyecto: async (parent, args, context) => await ModeloProyecto.findOne({ _id: parent.proyecto }),
+		estudiante: async (parent, args, context) => await ModeloUsuario.findOne({ _id: parent.estudiante }),
 	},
 
 	Query: {
